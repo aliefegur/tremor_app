@@ -8,6 +8,7 @@ import 'package:tremor_app/screens/tremor_history_screen.dart';
 import 'package:tremor_app/screens/medication_screen.dart';
 import 'package:tremor_app/screens/live_tremor_screen.dart';
 import 'package:tremor_app/screens/menu_screen.dart';
+import 'package:tremor_app/services/tremor_service.dart';
 
 import 'package:tremor_app/state/step_state.dart';
 import 'package:tremor_app/state/medication_state.dart';
@@ -24,6 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   String intensityText = "High Intensity";
   List<Color> tremorColors = [Colors.orange, Colors.pink];
 
+  final TremorService tremorService = TremorService();
+
   Timer? timer;
 
   @override
@@ -33,6 +36,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
     timer = Timer.periodic(const Duration(seconds: 2), (_) {
       _updateTremorLevel();
+    });
+
+    tremorService.init().then((val) {
+      print("Tremor Service Intiialized!");
+
+      final raw = List<double>.generate(
+        250 * 6,
+            (i) => 0.01 * (i % 6),
+      );
+
+      final processed = tremorService.preprocessor.process(raw);
+      final score = tremorService.inference.run(processed);
+
+      print('Tremor score: $score');
     });
   }
 

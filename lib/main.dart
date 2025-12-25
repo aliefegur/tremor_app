@@ -21,6 +21,11 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
+  StatelessElement createElement() {
+    return super.createElement();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
