@@ -5,7 +5,7 @@ import 'package:sensors_plus/sensors_plus.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets("Gyroscope & Accelometer Test", (tester) async {
+  testWidgets("Gyroscope & Accelerometer Test", (tester) async {
     final accSub =
         userAccelerometerEventStream(
           samplingPeriod: SensorInterval.normalInterval,

@@ -10,9 +10,13 @@ void main() {
 
     await service.init();
 
-    final raw = List<double>.generate(
+    /*final raw = List<double>.generate(
       250 * 6,
           (i) => 0.01 * (i % 6),
+    );*/
+    final raw = List<double>.generate(
+      250 * 6,
+          (i) => 0,
     );
 
     final processed = service.preprocessor.process(raw);
